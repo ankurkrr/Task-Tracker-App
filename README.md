@@ -78,6 +78,15 @@ npm install
   JWT_SECRET=your_jwt_secret
   PORT=5000
   ```
+
+  **How to create a JWT_SECRET:**
+  You can generate a secure random secret using Node.js in your terminal:
+
+  ```bash
+  node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+  ```
+
+  Copy the output and use it as your `JWT_SECRET`.
 - Start the backend server:
 
   ```bash
@@ -129,9 +138,7 @@ npm install
 ## 🖥️ Deployment
 
 - **Frontend:** Deployed on [Vercel](https://vercel.com/)
-- **Backend:** Deployed on [Render](https://render.com/) (or your preferred Node.js hosting)
-
----
+- **Backend:** Deployed on [Render](https://render.com/)
 
 ## 📄 License
 
