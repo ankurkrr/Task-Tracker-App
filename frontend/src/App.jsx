@@ -9,15 +9,9 @@ import Profile from './components/Profile';
 
 
 const Landing = () => {
-  // const navigate = useNavigate();
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 via-gray-900 to-black px-4">
       <Login />
-        {/* className="mt-4 text-blue-500 underline"
-        onClick={() => navigate('/signup')}
-      >
-        Signup
-      </button> */} */
     </div>
   );
 };
