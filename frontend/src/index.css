@@ -1,5 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind screens;
-@tailwind typography;
+
+@layer base {
+  body {
+    @apply bg-[#2a2a2a] text-gray-200;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply bg-transparent border border-gray-600 rounded-lg px-4 py-3 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all duration-200;
+  }
+
+  .select-field {
+    @apply bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#20B2AA] focus:border-transparent transition-all duration-200 cursor-pointer appearance-none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .select-field:hover {
+    @apply border-gray-500 bg-gray-700;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  }
+
+  .select-field:focus {
+    @apply ring-2 ring-[#20B2AA] border-transparent;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2320B2AA' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    z-index: 1001;
+    box-shadow: 0 0 0 3px rgba(32, 178, 170, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .select-field option {
+    @apply text-gray-200;
+    background-color: #1f2937 !important; /* gray-800 */
+    padding: 12px 16px;
+    border: none;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .select-field option:hover,
+  .select-field option:focus {
+    background-color: #374151 !important; /* gray-700 */
+    color: #ffffff !important;
+  }
+
+  .select-field option:checked {
+    background-color: #20B2AA !important;
+    color: #ffffff !important;
+  }
+
+  /* Enhanced dropdown container positioning */
+  .dropdown-container {
+    position: relative;
+    z-index: 999;
+    display: block;
+    width: 100%;
+  }
+
+  /* Ensure proper stacking context for select dropdowns */
+  .select-field:focus-within {
+    z-index: 1001;
+  }
+
+  /* Fix for backdrop-blur stacking context issues */
+  .project-card,
+  .form-container {
+    position: relative;
+  }
+
+  /* Ensure dropdowns appear above backdrop-blur elements */
+  select:focus,
+  select:active {
+    position: relative;
+    z-index: 1002 !important;
+  }
+
+  /* Prevent parent overflow from clipping dropdowns */
+  .form-container,
+  .project-card {
+    overflow: visible !important;
+  }
+
+  /* Additional positioning fixes for better dropdown alignment */
+  .dropdown-container select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Enhanced styling for dropdown options */
+  .select-field {
+    font-family: inherit;
+    font-weight: 500;
+    min-height: 48px;
+    align-items: center;
+    display: flex;
+  }
+
+  /* Better visual separation for dropdown options */
+  .select-field option:not(:last-child) {
+    border-bottom: 1px solid #374151;
+  }
+
+  /* Ensure consistent spacing and alignment */
+  .space-y-2 > .dropdown-container {
+    margin-top: 0.5rem;
+  }
+
+  /* Fix any potential scrolling issues with dropdown */
+  .select-field {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus ring for better accessibility */
+  .select-field:focus-visible {
+    outline: 2px solid #20B2AA;
+    outline-offset: 2px;
+  }
+
+  /* Improve dropdown arrow positioning */
+  .select-field {
+    background-position: right 12px center;
+  }
+
+  /* Better option text styling */
+  .select-field option {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+
+  /* Ensure proper dropdown width and alignment */
+  .dropdown-container {
+    isolation: isolate;
+  }
+
+  /* Fix any potential layout shifts */
+  .select-field {
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  /* Improve visual consistency with form inputs */
+  .select-field {
+    height: 48px;
+    line-height: 1.5;
+  }
+
+  /* Enhanced dropdown styling for dark theme */
+  .select-field {
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  /* Ensure dropdown options match the select button width */
+  .select-field option {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Final positioning fix for absolute alignment */
+  .dropdown-container {
+  }
+
+  /* Fix for containers that might affect dropdown positioning */
+  .max-w-7xl,
+  .max-w-6xl {
+    overflow: visible;
+  }
+
+  /* Ensure select dropdown options have proper positioning */
+  .select-field option {
+    position: relative;
+    z-index: inherit;
+    background-color: #1f2937; /* gray-800 */
+    color: #e5e7eb; /* gray-200 */
+  }
+
+  /* Additional positioning fix for select elements */
+  .select-field {
+  }
+
+  /* Handle dropdown positioning in different contexts */
+  @media (max-width: 768px) {
+    .select-field {
+      position: relative;
+      z-index: 1003;
+    }
+  }
+
+  .btn-primary {
+    @apply bg-[#20B2AA] hover:bg-[#1a9d96] text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent hover:bg-gray-700 text-gray-300 hover:text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 border border-gray-600 hover:border-gray-500;
+  }
+
+  .btn-danger {
+    @apply bg-transparent hover:bg-red-600/20 text-red-400 hover:text-red-300 font-medium px-4 py-2 rounded-lg transition-all duration-200 border border-red-600/30 hover:border-red-500;
+  }
+
+  .project-card {
+    @apply bg-gray-800/50 border border-gray-700 rounded-xl p-6 hover:bg-gray-800/70 transition-all duration-200;
+  }
+}

@@ -23,35 +23,36 @@ const Landing = () => {
 };
 
 const App = () => (
-  <Routes>
-    <Route path="/" element={<Landing />} />
-    <Route path="/signup" element={<Signup />} />
-        <Route
-      path="/profile"
-      element={
-        <PrivateRoute>
-          <Profile />
-        </PrivateRoute>
-      }
-    />
-    <Route
-      path="/projects"
-      element={
-        <PrivateRoute>
-          <ProjectManager />
-        </PrivateRoute>
-      }
-    />
-    <Route
-      path="/tasks/:projectId"
-      element={
-        <PrivateRoute>
-          <TaskManager />
-        </PrivateRoute>
-      }
-    />
-
-  </Routes>
+  <div className="min-h-screen bg-[#2a2a2a]">
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/projects"
+        element={
+          <PrivateRoute>
+            <ProjectManager />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/tasks/:projectId"
+        element={
+          <PrivateRoute>
+            <TaskManager />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
+  </div>
 );
 
 export default App;

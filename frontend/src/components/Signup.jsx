@@ -12,6 +12,7 @@ const Signup = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   
 
   const navigate = useNavigate();
@@ -21,12 +22,20 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, formData);
       localStorage.setItem('token', data.token);
-      navigate('/projects', { replace: true });
+      // Animate page transition
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        navigate('/projects', { replace: true });
+        document.body.classList.remove('fade-out');
+      }, 600);
     } catch (err) {
       alert(err.response?.data?.error || 'Signup failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,7 +44,12 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 via-gray-900 to-black px-4">
-      <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-sm text-white">
+      <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-sm text-white relative">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 z-10 rounded-2xl">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-500"></div>
+          </div>
+        )}
         <h2 className="text-2xl font-bold text-center mb-6 typing-animation inline-block ">Create Your Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -75,14 +89,14 @@ const Signup = () => {
           />
           <button
             type="submit"
-            disabled={!isFormComplete}
+            disabled={!isFormComplete || loading}
             className={`w-full py-2 rounded-lg font-semibold text-white transition ${
-              isFormComplete
+              isFormComplete && !loading
                 ? 'bg-green-500 hover:bg-green-600'
-                : 'w-full py-2 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600 transition'
+                : 'bg-green-500 opacity-60 cursor-not-allowed'
             }`}
           >
-            Sign Up
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
 
